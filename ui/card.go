@@ -1,7 +1,6 @@
 package ui
 
 import (
-	"fmt"
 	"noaawc/util"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
@@ -17,12 +16,13 @@ type UICard struct {
 
 type UIScrollingCards struct {
 	Cards     []UICard
+	Icons     []rl.Texture2D
 	Duration  float32
 	animating bool
 	runtime   float32
 }
 
-func NewUIScrollingCards(count int, duration float32) *UIScrollingCards {
+func NewUIScrollingCards(count int, duration float32, icons []rl.Texture2D) *UIScrollingCards {
 	if count <= 0 || duration < 0 {
 		return nil
 	}
@@ -31,7 +31,7 @@ func NewUIScrollingCards(count int, duration float32) *UIScrollingCards {
 	// Create a UICard for each period
 	for i := range cards {
 		// Create a new UICard
-		scale := util.SinScale(i, len(cards))
+		scale := util.EaseInOut(i, len(cards))
 
 		// TODO: make UICard sizes configurable
 		width := 100 * scale
@@ -52,9 +52,9 @@ func NewUIScrollingCards(count int, duration float32) *UIScrollingCards {
 			Index: i,
 		}
 	}
-
 	return &UIScrollingCards{
 		Cards:     cards,
+		Icons:     icons,
 		Duration:  duration,
 		animating: false,
 		runtime:   0,
@@ -62,16 +62,15 @@ func NewUIScrollingCards(count int, duration float32) *UIScrollingCards {
 }
 
 func (u *UIScrollingCards) Draw() {
-	for _, card := range u.Cards {
+	for i, card := range u.Cards {
 
-		// TODO: calculate the visible range based on configured sizes
+		// TODO: calculate the visible range based on configurable sizes
 		if card.Index < 2 || card.Index > 9 {
 			continue
 		}
 
-		// half sine wave to ease scale in and out
-		//scale := float32(math.Sin((float64(card.Index) - 0.5) / float64(len(cards)) * 180.0))
-		scale := util.SinScale(card.Index, len(u.Cards))
+		// Ease-in-out using sine wave
+		scale := util.EaseInOut(card.Index, len(u.Cards))
 		if scale < 0.5 {
 			scale = 0.5
 		}
@@ -82,10 +81,9 @@ func (u *UIScrollingCards) Draw() {
 			Height: card.Size.Y,
 		}
 
-		rl.DrawRectangleRounded(r, 0.25, 15, rl.ColorAlpha(rl.LightGray, scale))
-		rl.DrawRectangleRoundedLines(r, 0.25, 15, 3*scale, rl.ColorAlpha(rl.RayWhite, scale))
-		rl.DrawText(fmt.Sprintf("%d", card.Index+1), int32(card.Position.X+card.Size.X/2), int32(card.Position.Y+card.Size.Y/2), 14, rl.RayWhite)
-		//fmt.Printf("Card %d, Alpha %2.2f\n", i, scale)
+		rl.DrawRectangleRounded(r, 0.25, 15, rl.ColorAlpha(rl.Gray, 0.25))
+		rl.DrawRectangleRoundedLines(r, 0.25, 15, 3*scale, rl.ColorAlpha(rl.RayWhite, 0.25))
+		rl.DrawTexturePro(u.Icons[i], rl.Rectangle{X: 0, Y: 0, Width: 100, Height: -150}, r, rl.Vector2{X: 0, Y: 0}, 0, rl.White)
 	}
 }
 

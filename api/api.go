@@ -30,6 +30,8 @@ func NewAPI(c *config.Config) *API {
 	}
 }
 
+// GetOffice() returns the name of the office responsible for
+// the weather observations.
 func (api *API) GetOffice() (string, error) {
 	// Grab the cached point so we can identify the Office (CWA)
 	p, err := noaa.Points(api.cfg.NOAA.Latitude, api.cfg.NOAA.Longitude)
@@ -45,6 +47,10 @@ func (api *API) GetOffice() (string, error) {
 	return o.Name + " (" + p.CWA + ")", nil
 }
 
+// GetForecastPeriods() returns the forecast weather observations
+// for the next 14 periods. (Up to 2 per day and up to 8 days)
+// When pulling forecast observations in the evening, for example,
+// the forecast for "today" may include only 1 observation.
 func (api *API) GetForecastPeriods() ([]ForecastPeriod, error) {
 	// Get the forecast from weather.gov
 	forecast, err := noaa.Forecast(api.cfg.NOAA.Latitude, api.cfg.NOAA.Longitude)
