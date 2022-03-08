@@ -2,6 +2,8 @@
 > The source data for this application is maintained by the National Weather Service under the umbrella of the 
 National Oceanic and Atmospheric Administration (NOAA).
 
+![NOAAWC](screenshots/noaawc.png "Screenshot of the NOAA Weather Client")
+
 This is a hobby project and a simple graphical client for the NOAA weather API hosted at weather.gov. This software 
 uses the (excellent) Raylib library with Go bindings to display weather forecast data. The forecast data is rendered 
 to an underlying OpenGL context setup by Raylib.
