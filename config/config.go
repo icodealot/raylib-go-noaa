@@ -25,7 +25,7 @@ import (
 // -----------------------------------------------------------------
 func NewConfig() (*Config, error) {
 	cfg := &Config{}
-	cfgPath, lat, lon, err := parseFlags()
+	cfgPath, lat, lon, uom, err := parseFlags()
 	if err != nil {
 		return nil, err
 	}
@@ -38,6 +38,9 @@ func NewConfig() (*Config, error) {
 		cfg.NOAA.Latitude = lat
 		cfg.NOAA.Longitude = lon
 	}
+	if uom == "si" {
+		cfg.NOAA.Units = "si"
+	}
 	return cfg, nil
 }
 
@@ -47,6 +50,7 @@ type Config struct {
 	NOAA struct {
 		Latitude  string `yaml:"latitude"`
 		Longitude string `yaml:"longitude"`
+		Units     string `yaml:"units"`
 	} `yaml:"noaa"`
 }
 
@@ -86,18 +90,21 @@ func validateConfigPath(path string) error {
 // when the program was launched and returns the path if there
 // were no errors. Defaults to looking for config.yml in the
 // current working directory if no -config argument was sent.
-func parseFlags() (string, string, string, error) {
+func parseFlags() (string, string, string, string, error) {
+	// TODO: probably worth converting this to a config/struct now.
 	var path string
 	var lat string
 	var lon string
+	var uom string
 	flag.StringVar(&path, "config", "", "path to YAML config file.")
 	flag.StringVar(&lat, "lat", "41.837", "latitude of noaa location") // default to Chicago
 	flag.StringVar(&lon, "lon", "-87.685", "longitude of noaa location")
+	flag.StringVar(&uom, "uom", "", "unit of measure can be si or us (the default)")
 	flag.Parse()
 	if path != "" {
 		if err := validateConfigPath(path); err != nil {
-			return "", "", "", err
+			return "", "", "", "", err
 		}
 	}
-	return path, lat, lon, nil
+	return path, lat, lon, uom, nil
 }

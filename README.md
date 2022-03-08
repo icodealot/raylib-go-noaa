@@ -27,7 +27,7 @@ latitude and longitude value.
 
 ##### Config File
 `config.yml`: The first option is to edit the `config.yml` file included with this project. The example shown here 
-points the application at the Chicago, IL weather observations.
+points the application at the Chicago, IL weather observations pulling in standard units.
 
 ```yaml
 noaa:
@@ -43,4 +43,19 @@ noaawc.exe -config config.yml
 `-lat <latitude> -lon <longitude>`: The second option is to pass in the `lat` and `lon` arguments when starting the program.
 ```bash
 noaawc.exe -lat "41.837" -lon "-87.685"
+```
+
+##### Optional Arguments
+`config.yml`: If you wish to pull forecast data in Metric units you may pass the "units" parameter in the config file as follows.
+
+```yaml
+noaa:
+  latitude: 41.837
+  longitude: -87.685
+  units: si
+```
+Alternatively, you can set the units via command line argument such as:
+`-uom <units>`: units can be "si", "us", or not set (defaults to us)
+```bash
+noaawc.exe -uom si
 ```

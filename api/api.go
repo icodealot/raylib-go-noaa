@@ -52,6 +52,9 @@ func (api *API) GetOffice() (string, error) {
 // When pulling forecast observations in the evening, for example,
 // the forecast for "today" may include only 1 observation.
 func (api *API) GetForecastPeriods() ([]ForecastPeriod, error) {
+	if api.cfg.NOAA.Units == "si" {
+		noaa.SetUnits(api.cfg.NOAA.Units)
+	}
 	// Get the forecast from weather.gov
 	forecast, err := noaa.Forecast(api.cfg.NOAA.Latitude, api.cfg.NOAA.Longitude)
 	if err != nil {

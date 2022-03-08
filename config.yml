@@ -1,3 +1,4 @@
 noaa:
   latitude: 41.837
   longitude: -87.685
+  units: si
