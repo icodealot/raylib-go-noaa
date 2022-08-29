@@ -1,7 +1,7 @@
 github.com/gen2brain/raylib-go/raylib v0.0.0-20220116181443-e4777d30ee99 h1:oIi/mobSw0P7bujBj8og1cAvHJw2vBbjcA8gJfUgfyA=
 github.com/gen2brain/raylib-go/raylib v0.0.0-20220116181443-e4777d30ee99/go.mod h1:+NbsqGlEQqGqrsgJFF5Yj2dkvn0ML2SQb8RqM2hJsPU=
-github.com/icodealot/noaa v0.0.0-20220308184326-d035e0da3fef h1:V6G4iXyPSRt5woM2NFtt8FgO7EAlQyr5BvjexQtS/FA=
-github.com/icodealot/noaa v0.0.0-20220308184326-d035e0da3fef/go.mod h1:Y/nx5ClyYVmXH69JHij+CQe8BmbqMCnDDiQBgw72jg4=
+github.com/icodealot/noaa v0.0.1 h1:GFVfsOjdVMM55eMaI923liw8Dv/V1XcPxvgryHvEFRk=
+github.com/icodealot/noaa v0.0.1/go.mod h1:Y/nx5ClyYVmXH69JHij+CQe8BmbqMCnDDiQBgw72jg4=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b h1:h8qDotaEPuJATrMmW04NCwg7v22aHH28wwpauUhK9Oo=

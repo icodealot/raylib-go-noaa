@@ -6,19 +6,7 @@ import (
 	noaa "github.com/icodealot/noaa"
 )
 
-type ForecastPeriod struct {
-	ID              int32   `json:"number"`
-	Name            string  `json:"name"`
-	StartTime       string  `json:"startTime"`
-	EndTime         string  `json:"endTime"`
-	IsDaytime       bool    `json:"isDaytime"`
-	Temperature     float64 `json:"temperature"`
-	TemperatureUnit string  `json:"temperatureUnit"`
-	WindSpeed       string  `json:"windSpeed"`
-	WindDirection   string  `json:"windDirection"`
-	Summary         string  `json:"shortForecast"`
-	Details         string  `json:"detailedForecast"`
-}
+type ForecastPeriod = noaa.ForecastResponsePeriod
 
 type API struct {
 	cfg *config.Config
